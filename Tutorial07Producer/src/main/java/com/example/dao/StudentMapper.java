@@ -40,6 +40,12 @@ public interface StudentMapper
     })
     List<StudentModel> selectAllStudents ();
     
+    @Select("select course.id_course, name, credits "+
+    		"from studentcourse join course " +
+    		"on studentcourse.id_course = course.id_course "+
+    		"where studentcourse.npm = #{npm}")
+    List<CourseModel> selectCourses (@Param("npm") String npm);
+    
     @Insert("INSERT INTO student (npm, name, gpa) VALUES (#{npm}, #{name}, #{gpa})")
     void addStudent (StudentModel student);
     

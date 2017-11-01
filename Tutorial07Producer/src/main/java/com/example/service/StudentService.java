@@ -9,8 +9,6 @@ public interface StudentService
 {
     StudentModel selectStudent (String npm);
 
-    CourseModel selectCourse (String idcourse);
-
     List<StudentModel> selectAllStudents ();
 
     void addStudent (StudentModel student);
