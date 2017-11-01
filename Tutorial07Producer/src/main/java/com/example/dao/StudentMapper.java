@@ -40,29 +40,6 @@ public interface StudentMapper
     })
     List<StudentModel> selectAllStudents ();
     
-    @Select("select id_course, name, credits from course where id_course = #{id_course}")
-    @Results(value = {
-    		@Result(property="id_course", column="id_course"),
-    		@Result(property="name", column="name"),
-    		@Result(property="credits", column="credits"),
-    		@Result(property="students", column="id_course",
-    				javaType = List.class,
-    				many=@Many(select="selectStudents"))
-    })
-    CourseModel selectCourse(@Param("id_course") String idcourse);
-
-    @Select("select student.npm, name " +
-    		"from studentcourse join student " +
-    		"on studentcourse.npm = student.npm "+
-    		"where studentcourse.id_course = #{id_course}")
-    List<StudentModel> selectStudents (@Param("id_course") String id_course);
-    
-    @Select("select course.id_course, name, credits "+
-    		"from studentcourse join course " +
-    		"on studentcourse.id_course = course.id_course "+
-    		"where studentcourse.npm = #{npm}")
-    List<CourseModel> selectCourses (@Param("npm") String npm);
-    
     @Insert("INSERT INTO student (npm, name, gpa) VALUES (#{npm}, #{name}, #{gpa})")
     void addStudent (StudentModel student);
     
