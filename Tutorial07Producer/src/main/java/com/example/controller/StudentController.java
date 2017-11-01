@@ -77,15 +77,6 @@ public class StudentController
             return "not-found";
         }
     }
-    
-    @RequestMapping("/course/view/{id}")
-    public String viewCoursePath(Model model, @PathVariable(value = "id") String id)
-    {
-    	CourseModel course = studentDAO.selectCourse(id);
-    	model.addAttribute("course", course);
-    	return "viewCourse";
-    }
-
 
     @RequestMapping("/student/viewall")
     public String view (Model model)
