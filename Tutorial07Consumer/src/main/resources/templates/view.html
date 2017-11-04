@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/fragment :: header-title-fragment">
+</head>
+<body>
+	<div th:replace="fragments/fragment :: header"></div>
+	<div class="container mt-5">
+		<h4 th:text="'NPM = ' + ${student.npm}">Student NPM</h4>
+	   	<h4 th:text="'Name = ' + ${student.name}">Student Name</h4>
+	   	<h4 th:text="'GPA = ' + ${student.gpa}">Student GPA</h4>
+	   	
+	   	<h4>Kuliah yang diambil</h4>
+	   	<ul th:each="course,iterationStatus: ${student.courses}">
+	   		<li>
+	   			<a th:text="${course.id_course} + ' - ' + ${course.name} + ' - ' + ${course.credits} + ' sks'" th:href="@{|/course/view/${course.id_course}|}"></a>
+	   		</li>
+	   	</ul>
+	</div>
+   	<div th:replace="fragments/fragment :: footer"></div>
+</body>
+</html>
+

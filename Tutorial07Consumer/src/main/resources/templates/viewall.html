@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/fragment :: header-title-fragment">
+	<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+	 <script type="text/javascript" src="/datatables/datatables.js"></script>
+	 <script type="text/javascript" src="/js/viewall.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/fragment :: header"></div>
+	
+	<div class="container mt-5">
+		<h3 class="text-center">All Students</h3>
+     <table id="table_id">
+     	<thead>
+     		<tr>
+ 				<th>No</th>
+  			<th>NPM</th>
+  			<th>Name</th>
+  			<th>GPA</th>
+  			<th>Status</th>
+  			<th>Update</th>
+  			<th>Delete</th>
+ 			</tr>
+     	</thead>
+     	<tbody>
+     		<div th:each="student,iterationStatus: ${students}">
+	  			<tr>
+	  				<td th:text="${iterationStatus.count}">No. 1</td>
+	  				<td><a th:text="${student.npm}" th:href="@{|/student/view/${student.npm}|}"></a></td>
+	  				<td th:text="${student.name}">Student Name</td>
+	  				<td th:text="${student.gpa}">Student GPA</td>
+	  				<td th:text="${student.gpa>=3.49} ? 'Cum Laude!' : 'Sangat Memuaskan'"></td>
+	  				<td><a th:href="'/student/update/' + ${student.npm}">Update Data</a></td>
+	  				<td><a th:href="'/student/delete/' + ${student.npm}">Delete Data</a></td>
+	  			</tr>
+	      	</div>
+     	</tbody>
+		</table>
+	</div>
+	
+	<div th:replace="fragments/fragment :: footer"></div>	
+</body>
+</html>
