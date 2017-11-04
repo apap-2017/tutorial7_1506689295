@@ -8,14 +8,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.example.dao.StudentDAO;
-import com.example.model.StudentModel;
+import com.example.dao.CourseDAO;
+import com.example.model.CourseModel;
+
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class StudentDAOImpl implements StudentDAO
+public class CourseDAOImpl implements CourseDAO
 {
 	@Autowired
 	private RestTemplate restTemplate;
@@ -27,20 +28,20 @@ public class StudentDAOImpl implements StudentDAO
 	}
 	
 	@Override
-	public StudentModel selectStudent (String npm)
+	public CourseModel selectCourse (String id_course)
 	{
-		StudentModel student = restTemplate.getForObject(
-				"http://localhost:8080/rest/student/view/"+npm,
-				StudentModel.class);
-		return student;
+		CourseModel course = restTemplate.getForObject(
+				"http://localhost:8080/rest/course/view/"+ id_course,
+				CourseModel.class);
+		return course;
 	}
 
 	@Override
-	public List<StudentModel> selectAllStudents() 
+	public List<CourseModel> selectAllCourses() 
 	{
-		List<StudentModel> students = restTemplate.getForObject(
-				"http://localhost:8080/rest/student/viewall", List.class);
+		List<CourseModel> courses = restTemplate.getForObject(
+				"http://localhost:8080/rest/course/viewall", List.class);
 
-		return students;
+		return courses;
 	}
 }

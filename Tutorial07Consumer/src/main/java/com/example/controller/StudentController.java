@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.model.CourseModel;
 import com.example.model.StudentModel;
+import com.example.service.CourseService;
 import com.example.service.StudentService;
 
 @Controller
@@ -19,6 +20,9 @@ public class StudentController
 {
     @Autowired
     StudentService studentDAO;
+    
+    @Autowired
+    CourseService courseDAO;
 
 
     @RequestMapping("/")
@@ -89,12 +93,21 @@ public class StudentController
     @RequestMapping("/course/view/{id}")
     public String viewCoursePath(Model model, @PathVariable(value = "id") String id)
     {
-    	CourseModel course = studentDAO.selectCourse(id);
+    	CourseModel course = courseDAO.selectCourse(id);
     	model.addAttribute("page_title", "View Course");
     	model.addAttribute("course", course);
     	return "viewCourse";
     }
 
+    @RequestMapping("/course/viewall")
+    public String viewAllCourse (Model model)
+    {
+        List<CourseModel> courses = courseDAO.selectAllCourses();
+        model.addAttribute("page_title", "View All Courses");
+        model.addAttribute ("courses", courses);
+
+        return "viewallcourse";
+    }
 
     @RequestMapping("/student/viewall")
     public String view (Model model)
@@ -134,11 +147,4 @@ public class StudentController
        
     }
     
-    @RequestMapping(value = "/view/produk/{id}", method = RequestMethod.POST)
-    public String updateSubmit(StudentModel student, Model model)
-    {
-    	model.addAttribute("page_title", "Student Updated");
-    	studentDAO.updateStudent(student);
-    	return "viewproduk";
-    }
 }

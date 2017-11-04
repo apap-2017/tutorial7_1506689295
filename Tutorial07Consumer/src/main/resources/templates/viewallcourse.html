@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/fragment :: header-title-fragment">
+	<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+	 <script type="text/javascript" src="/datatables/datatables.js"></script>
+	 <script type="text/javascript" src="/js/viewall.js"></script>
+</head>
+<body>
+	<div th:replace="fragments/fragment :: header"></div>
+	
+	<div class="container mt-5">
+		<h3 class="text-center">All Courses</h3>
+     <table id="table_id">
+     	<thead>
+     		<tr>
+ 				<th>No</th>
+	  			<th>Course Id</th>
+	  			<th>Course Name</th>
+	  			<th>Credits</th>
+ 			</tr>
+     	</thead>
+     	<tbody>
+     		<div th:each="course,iterationStatus: ${courses}">
+	  			<tr>
+	  				<td th:text="${iterationStatus.count}"></td>
+	  				<td><a th:text="${course.id_course}" th:href="@{|/course/view/${course.id_course}|}"></a></td>
+	  				<td th:text="${course.name}"></td>
+	  				<td th:text="${course.credits}"></td>
+	  			</tr>
+	      	</div>
+     	</tbody>
+		</table>
+	</div>
+	
+	<div th:replace="fragments/fragment :: footer"></div>	
+</body>
+</html>

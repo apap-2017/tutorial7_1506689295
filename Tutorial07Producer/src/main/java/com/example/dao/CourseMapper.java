@@ -40,7 +40,7 @@ public interface CourseMapper
     })
     List<CourseModel> selectAllCourse ();
     
-    @Select("select student.npm, name " +
+    @Select("select student.npm, name, gpa " +
     		"from studentcourse join student " +
     		"on studentcourse.npm = student.npm "+
     		"where studentcourse.id_course = #{id_course}")
